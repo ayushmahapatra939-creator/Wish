@@ -1,0 +1,150 @@
+<!DOCTYPE html><html lang="id">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Selamat Tahun Baru ❤️</title>
+  <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;600&family=Great+Vibes&display=swap" rel="stylesheet">
+  <style>
+    *{margin:0;padding:0;box-sizing:border-box}
+    body{
+      font-family:'Poppins',sans-serif;
+      min-height:100vh;
+      background:
+        linear-gradient(rgba(15,32,39,.7),rgba(44,83,100,.7)),
+        url('bg.jpg') center/cover no-repeat fixed;
+      color:#fff;
+      overflow:hidden;
+    }.screen{position:fixed;inset:0;display:flex;align-items:center;justify-content:center;z-index:5;background:#0f2027}
+.lock{
+  background:rgba(255,255,255,.08);
+  padding:30px;border-radius:24px;text-align:center;
+  backdrop-filter:blur(10px);width:90%;max-width:360px;
+  animation:pop .9s ease
+}
+.lock h2{margin-bottom:10px}
+.lock input{
+  width:100%;padding:12px;border:none;border-radius:12px;
+  outline:none;margin-top:10px;font-size:15px
+}
+.lock button{
+  margin-top:14px;width:100%;padding:12px;border:none;
+  border-radius:999px;background:#ff4d6d;color:#fff;font-weight:600
+}
+
+@keyframes pop{from{transform:scale(.9);opacity:0}to{transform:scale(1);opacity:1}}
+
+.container{position:relative;z-index:2;display:none;align-items:center;justify-content:center;min-height:100vh;padding:20px}
+.card{
+  max-width:420px;width:100%;
+  background:rgba(255,255,255,.08);
+  border-radius:24px;
+  padding:28px 24px 32px;
+  box-shadow:0 20px 60px rgba(0,0,0,.4);
+  backdrop-filter: blur(10px);
+  text-align:center;
+  animation:pop .9s ease
+}
+.year{font-size:60px;font-weight:600;letter-spacing:6px}
+.name{font-family:'Great Vibes',cursive;font-size:42px;margin:10px 0}
+.msg{font-size:15px;line-height:1.7;opacity:.95;margin-top:10px}
+.btn{margin-top:22px;display:inline-block;padding:12px 22px;border-radius:999px;background:#ff4d6d;color:#fff;text-decoration:none;font-weight:600;box-shadow:0 10px 30px rgba(255,77,109,.45)}
+.footer{margin-top:14px;font-size:12px;opacity:.85}
+.countdown{margin-top:14px;font-size:14px;letter-spacing:1px}
+
+  </style>
+</head>
+<body>  <!-- LAYAR PASSWORD -->  <div class="screen" id="lockScreen">
+    <div class="lock">
+      <h2>🔒 Pesan Tahun Baru Rahasia</h2>
+      <p>Hanya untuk kamu ❤️</p>
+      <input type="password" id="pwd" placeholder="Masukkan kata rahasia" />
+      <button type="button" id="unlockBtn">Buka ✨</button>
+    </div>
+  </div>  <!-- KONTEN UTAMA -->  <div class="container" id="main">
+    <div class="card">
+      <div class="year">2026</div>
+      <div class="name">Untuk <span id="sp">Seseorang Spesial</span> ❤️</div>
+      <p class="msg">
+        Sebelum tahun baru ini dimulai,
+        aku ingin kamu tahu satu hal.
+      </p><div class="countdown" id="count"></div>
+
+  <a class="btn" href="#" onclick="reveal()">Buka Kejutan 🎁</a>
+  <div class="footer" id="ft"></div>
+
+  <div id="surpriseBox" style="display:none;margin-top:20px;animation:pop 1s ease">
+    <div style="font-size:18px">💌 Pesan Rahasia 💌</div>
+    <p id="typeMsg" style="font-size:14px;line-height:1.7;margin-top:10px"></p>
+    <div style="margin-top:12px;font-size:22px">❤️✨❤️</div>
+  </div>
+</div>
+
+  </div>  <script>
+    /* ===== PENGATURAN ===== */
+    const personName = 'Yessica';
+    const secretPassword = 'forever';
+    const fromName = 'Ayush';
+
+    document.getElementById('sp').innerText = personName;
+    document.getElementById('unlockBtn').addEventListener('click', unlock);
+
+    function unlock(){
+      const p=document.getElementById('pwd').value;
+      if(p===secretPassword){
+        document.getElementById('lockScreen').style.display='none';
+        document.getElementById('main').style.display='flex';
+        
+      }else{
+        alert('Kata sandi salah 😅');
+      }
+    }
+
+    function reveal(){
+      document.getElementById('ft').innerHTML = `Dari <b>${fromName}</b> 💫`;
+      document.getElementById('surpriseBox').style.display='block';
+      typeWriter();
+    }
+
+    const secretText = `Kamu adalah perempuan tercantik di dunia bagiku.
+
+Seindah apa pun kata yang aku ucapkan,
+tidak akan pernah cukup untuk menggambarkan dirimu.
+Dan sebanyak apa pun aku mengucapkan terima kasih,
+itu juga masih terasa kurang.
+
+Aku hanya ingin satu hal —
+aku tidak pernah ingin melepaskanmu,
+dan aku ingin selalu berjalan bersamamu.
+
+Terima kasih sudah menemaniku
+menuju tahun 2026 ini,
+dalam suka maupun duka ❤️`;
+
+    function typeWriter(){
+      const el=document.getElementById('typeMsg');
+      el.innerHTML='';
+      let i=0;
+      const t=setInterval(()=>{
+        el.innerHTML+= secretText.charAt(i);
+        i++;
+        if(i>=secretText.length) clearInterval(t);
+      },40);
+    }
+
+    const target = new Date('Jan 1, 2026 00:00:00').getTime();
+    setInterval(()=>{
+      const now=new Date().getTime();
+      const d=target-now;
+      if(d>0){
+        const days=Math.floor(d/(1000*60*60*24));
+        const hrs=Math.floor((d%(1000*60*60*24))/(1000*60*60));
+        const min=Math.floor((d%(1000*60*60))/(1000*60));
+        const sec=Math.floor((d%(1000*60))/1000);
+        document.getElementById('count').innerText=
+          `Hitung mundur: ${days}h ${hrs}j ${min}m ${sec}d`;
+      }else{
+        document.getElementById('count').innerText='🎆 Selamat Tahun Baru 🎆';
+      }
+    },1000);
+  </script></body>
+</html>
